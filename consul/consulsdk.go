@@ -33,6 +33,7 @@ func NewConsulSDK(consulAddress string, serverPort int) (*ConsulSDK, error) {
 	}, nil
 }
 
+// GetInstance 给出一个单例展示
 func GetInstance() *ConsulSDK {
 	once.Do(func() {
 		consulAddress := "127.0.0.1:8500"

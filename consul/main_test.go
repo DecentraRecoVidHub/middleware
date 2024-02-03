@@ -30,8 +30,9 @@ func TestConsul(t *testing.T) {
 	}
 	fmt.Printf("Discovered service address: %s\n", serviceAddress)
 
+	sdk.ConfigCenter.SetValue("test_key", "test_value")
 	//使用 ConsulConfig 获取键对应的值
-	value, err := sdk.ConfigCenter.GetValue("test")
+	value, err := sdk.ConfigCenter.GetValue("test_key")
 	if err != nil {
 		fmt.Println("Failed to get value:", err)
 		return
