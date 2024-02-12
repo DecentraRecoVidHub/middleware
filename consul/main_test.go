@@ -8,7 +8,7 @@ import (
 
 func TestConsul(t *testing.T) {
 	//创建新的 consul sdk
-	sdk := GetInstance()
+	sdk := GetConsulSdk("127.0.0.1:8500")
 
 	// 注册服务
 	serviceID := "my_service"

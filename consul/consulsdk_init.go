@@ -12,8 +12,8 @@ type ConsulSDK struct {
 }
 
 var (
-	instance *ConsulSDK
-	once     sync.Once
+	consulSDK *ConsulSDK
+	once      sync.Once
 )
 
 func NewConsulSDK(consulAddress string, serverPort int) (*ConsulSDK, error) {
@@ -33,10 +33,9 @@ func NewConsulSDK(consulAddress string, serverPort int) (*ConsulSDK, error) {
 	}, nil
 }
 
-// GetInstance 给出一个单例展示
-func GetInstance() *ConsulSDK {
+// GetConsulSdk 给出一个单例展示 eg. consulAddress := "127.0.0.1:8500"
+func GetConsulSdk(consulAddress string) *ConsulSDK {
 	once.Do(func() {
-		consulAddress := "127.0.0.1:8500"
 		serverPort := 8080
 
 		client, err := NewConsulClient(consulAddress, serverPort)
@@ -51,10 +50,10 @@ func GetInstance() *ConsulSDK {
 			os.Exit(1)
 		}
 
-		instance = &ConsulSDK{
+		consulSDK = &ConsulSDK{
 			Client:       client,
 			ConfigCenter: configCenter,
 		}
 	})
-	return instance
+	return consulSDK
 }
